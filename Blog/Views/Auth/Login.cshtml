@@ -1,0 +1,34 @@
+﻿@model Blog.ViewModels.AuthLogin
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+
+            <div>
+                @Html.LabelFor(x => x.Username)
+                @Html.EditorFor(x => x.Username)
+            </div>
+            <div>
+                @Html.LabelFor(x => x.Password)
+                @Html.PasswordFor(x => x.Password)
+            </div>
+            <div>
+                <input type="submit" name="Login" />
+            </div>
+        }
+    </div>
+</body>
+</html>
