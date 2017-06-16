@@ -1,0 +1,42 @@
+﻿@using System.Web.Optimization
+
+@{
+    Layout = null;
+}
+
+@helper SelectedClass(string name) { 
+    if (name == ViewBag.Selected)
+    {
+        @: active
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Blog - Admin</title>
+
+    @Styles.Render("~/Admin/Styles")
+</head>
+<body>
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="@SelectedClass("posts")">
+                @Html.ActionLink("Posts", "Index", "Posts", new { area = "admin" }, null)
+            </li>
+            <li class="@SelectedClass("users")">
+                @Html.ActionLink("Users", "Index", "Users", new { area = "admin" }, null)
+            </li>
+            <li class="pull-right">
+                @Html.RouteLink("Back to Home", "Home")
+            </li>
+        </ul>
+
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/Admin/Scripts")
+    @RenderSection("Scripts", false)
+</body>
+</html>

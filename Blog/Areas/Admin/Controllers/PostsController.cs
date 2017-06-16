@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Blog.Infrastructure;
 using System.Web.Mvc;
 
 namespace Blog.Areas.Admin.Controllers
 {
     [Authorize(Roles = "admin")]
+    [Selected("posts")]
     public class PostsController : Controller
     {
         public ActionResult Index()
         {
-            return View("Admin -> Posts");
+            return View();
         }
     }
 }
