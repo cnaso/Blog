@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace Blog.Core.Domain
 {
@@ -16,5 +13,10 @@ namespace Blog.Core.Domain
         public string PasswordHash { get; set; }
 
         public IList<Role> Roles { get; set; }
+
+        public void SetPassword(string password)
+        {
+            PasswordHash = password;
+        }
     }
 }
