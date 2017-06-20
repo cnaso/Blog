@@ -8,13 +8,13 @@
     @Html.ValidationSummary()
 
     <div class="form-group">
-        @Html.LabelFor(f => f.Username)
-        @Html.TextBoxFor(f => f.Username, new { @class = "form-control" })
+        @Html.LabelFor(u => u.Username)
+        @Html.TextBoxFor(u => u.Username, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(f => f.Email)
-        @Html.TextBoxFor(f => f.Email, new { @class = "form-control", type = "email" })
+        @Html.LabelFor(u => u.Email)
+        @Html.TextBoxFor(u => u.Email, new { @class = "form-control", type = "email" })
     </div>
 
     <div class="btn-toolbar">

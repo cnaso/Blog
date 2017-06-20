@@ -29,4 +29,12 @@ namespace Blog.Areas.Admin.ViewModels
         [Required, MaxLength(255)]
         public string Email { get; set; }
     }
+
+    public class ResetUserPassword
+    {
+        public string Username { get; set; }
+
+        [Required, DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
 }

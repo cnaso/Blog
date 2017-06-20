@@ -98,5 +98,59 @@ namespace Blog.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult ResetPassword(int id)
+        {
+            var user = _context.Users.Find(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(new ResetUserPassword
+            {
+                Username = user.Username
+            });
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(int id, ResetUserPassword form)
+        {
+            var user = _context.Users.Find(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            form.Username = user.Username;
+
+            if (!ModelState.IsValid)
+            {
+                return View(form);
+            }
+
+            user.SetPassword(form.Password);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var user = _context.Users.Find(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
