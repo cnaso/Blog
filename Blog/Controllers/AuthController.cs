@@ -1,4 +1,6 @@
-﻿using Blog.ViewModels;
+﻿using Blog.Persistence;
+using Blog.ViewModels;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -6,6 +8,13 @@ namespace Blog.Controllers
 {
     public class AuthController : Controller
     {
+        private BlogContext _context;
+
+        public AuthController(BlogContext context)
+        {
+            _context = context;
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -14,12 +23,20 @@ namespace Blog.Controllers
         [HttpPost]
         public ActionResult Login(AuthLogin form, string returnUrl)
         {
+            var user = _context.Users.FirstOrDefault(u => u.Username == form.Username);
+
+            if (user == null || !user.CheckPassword(form.Password))
+            {
+                Core.Domain.User.FakeHash();
+                ModelState.AddModelError("Username", "Username or password is not correct.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(form);
             }
 
-            FormsAuthentication.SetAuthCookie(form.Username, true);
+            FormsAuthentication.SetAuthCookie(user.Username, true);
 
             if (!string.IsNullOrWhiteSpace(returnUrl) & Url.IsLocalUrl(returnUrl))
             {

@@ -8,6 +8,7 @@ namespace Blog.App_Start
         {
             bundles.Add(new StyleBundle("~/Admin/Styles")
                 .Include("~/Content/Styles/bootstrap.css")
+                .Include("~/Content/Styles/bootstrap-theme.css")
                 .Include("~/Content/Styles/Admin.css"));
 
             bundles.Add(new StyleBundle("~/Styles")
