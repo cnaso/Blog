@@ -5,6 +5,7 @@
         var $this = $(this);
         var id = $this.data("id");
         var title = $this.data("title");
+        var token = $("input[name='__RequestVerificationToken']").val();
 
         $('.dialog').load("../Content/Shared/DeleteDialog.html", function (response, status) {
             if (status == "success") {
@@ -16,7 +17,7 @@
                         type: "post",
                         url: "/Admin/Users/Delete/",
                         ajaxasync: true,
-                        data: { id: id },
+                        data: { __RequestVerificationToken: token, id: id },
                         success: function () {
                             window.location.replace("/Admin/Users/Index");
                         },

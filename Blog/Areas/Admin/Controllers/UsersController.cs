@@ -31,7 +31,7 @@ namespace Blog.Areas.Admin.Controllers
             return View(new NewUser());
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult New(NewUser form)
         {
             if (_context.Users.Any(u => u.Username == form.Username))
@@ -71,7 +71,7 @@ namespace Blog.Areas.Admin.Controllers
             });
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(int id, EditUser form)
         {
             var user = _context.Users.Find(id);
@@ -114,7 +114,7 @@ namespace Blog.Areas.Admin.Controllers
             });
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult ResetPassword(int id, ResetUserPassword form)
         {
             var user = _context.Users.Find(id);
@@ -137,7 +137,7 @@ namespace Blog.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             var user = _context.Users.Find(id);

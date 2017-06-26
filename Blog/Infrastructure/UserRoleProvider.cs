@@ -1,11 +1,19 @@
-﻿using System;
+﻿using Blog.Persistence;
+using System;
 using System.Web.Security;
 
 namespace Blog.Infrastructure
 {
     public class UserRoleProvider : RoleProvider
     {
+        private BlogContext _context;
+
         public override string ApplicationName { get; set; }
+
+        public UserRoleProvider(BlogContext context)
+        {
+            _context = context;
+        }
 
         public override string[] GetRolesForUser(string username)
         {
