@@ -2,6 +2,7 @@
 using Blog.Core.Domain;
 using Blog.Infrastructure;
 using Blog.Persistence;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -28,7 +29,15 @@ namespace Blog.Areas.Admin.Controllers
 
         public ActionResult New()
         {
-            return View(new NewUser());
+            return View(new NewUser()
+            {
+                Roles = _context.Roles.ToList().Select(role => new RoleCheckbox
+                {
+                    Id = role.Id,
+                    IsChecked = false,
+                    Name = role.Name
+                }).ToList()
+            });
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -49,6 +58,8 @@ namespace Blog.Areas.Admin.Controllers
             user.Username = form.Username;
             user.SetPassword(form.Password);
 
+            SyncUserRoles(form.Roles, user.Roles);
+
             _context.Users.Add(user);
             _context.SaveChanges();
 
@@ -68,6 +79,12 @@ namespace Blog.Areas.Admin.Controllers
             {
                 Username = user.Username,
                 Email = user.Email,
+                Roles = _context.Roles.ToList().Select(role => new RoleCheckbox
+                {
+                    Id = role.Id,
+                    IsChecked = user.Roles.Contains(role),
+                    Name = role.Name
+                }).ToList()
             });
         }
 
@@ -93,6 +110,8 @@ namespace Blog.Areas.Admin.Controllers
 
             user.Username = form.Username;
             user.Email = form.Email;
+
+            SyncUserRoles(form.Roles, user.Roles);
 
             _context.SaveChanges();
 
@@ -151,6 +170,23 @@ namespace Blog.Areas.Admin.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        private void SyncUserRoles(IList<RoleCheckbox> checkboxes, IList<Role> roles)
+        {
+            foreach (var role in _context.Roles.ToList())
+            {
+                var checkbox = checkboxes.Single(c => c.Id == role.Id);
+
+                if (checkbox.IsChecked)
+                {
+                    roles.Add(role);
+                }
+                else
+                {
+                    roles.Remove(role);
+                }
+            }
         }
     }
 }

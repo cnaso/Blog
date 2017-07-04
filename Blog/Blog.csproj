@@ -152,6 +152,7 @@
     <Content Include="Areas\Admin\Views\Users\New.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\ResetPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_RoleEditor.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />

@@ -17,6 +17,8 @@
         @Html.TextBoxFor(u => u.Email, new { @class = "form-control", type = "email" })
     </div>
 
+    @Html.Partial("_RoleEditor", Model.Roles)
+
     <div class="btn-toolbar">
         <input type="submit" value="Update User" class="btn btn-primary" />
         <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>

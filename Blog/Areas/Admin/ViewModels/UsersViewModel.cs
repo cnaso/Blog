@@ -11,6 +11,8 @@ namespace Blog.Areas.Admin.ViewModels
 
     public class NewUser
     {
+        public IList<RoleCheckbox> Roles { get; set; }
+
         [Required, MaxLength(128)]
         public string Username { get; set; }
 
@@ -23,6 +25,8 @@ namespace Blog.Areas.Admin.ViewModels
 
     public class EditUser
     {
+        public IList<RoleCheckbox> Roles { get; set; }
+
         [Required, MaxLength(128)]
         public string Username { get; set; }
 
@@ -36,5 +40,14 @@ namespace Blog.Areas.Admin.ViewModels
 
         [Required, DataType(DataType.Password)]
         public string Password { get; set; }
+    }
+
+    public class RoleCheckbox
+    {
+        public int Id { get; set; }
+
+        public bool IsChecked { get; set; }
+        
+        public string Name { get; set; }
     }
 }

@@ -16,6 +16,11 @@ namespace Blog.Core.Domain
 
         public IList<Role> Roles { get; set; }
 
+        public User()
+        {
+            Roles = new List<Role>();
+        }
+
         public void SetPassword(string password)
         {
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(password, WorkFactor);

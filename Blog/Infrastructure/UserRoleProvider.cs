@@ -1,23 +1,25 @@
-﻿using Blog.Persistence;
+﻿using Blog.Core.Domain;
+using Blog.Persistence;
 using System;
+using System.Linq;
 using System.Web.Security;
 
 namespace Blog.Infrastructure
 {
     public class UserRoleProvider : RoleProvider
     {
-        private BlogContext _context;
-
         public override string ApplicationName { get; set; }
-
-        public UserRoleProvider(BlogContext context)
-        {
-            _context = context;
-        }
 
         public override string[] GetRolesForUser(string username)
         {
-            return new[] { "admin" };
+            User user = null;
+
+            using (var context = new BlogContext())
+            {
+                user = context.Users.FirstOrDefault(u => u.Username == username);
+            }
+
+            return user.Roles.Select(role => role.Name).ToArray();
         }
 
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)

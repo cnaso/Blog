@@ -23,6 +23,8 @@
             @Html.PasswordFor(u => u.Password, new { @class = "form-control" })
         </div>
 
+        @Html.Partial("_RoleEditor", Model.Roles)
+
         <div class="btn-toolbar">
             <input type="submit" value="Create User" class="btn btn-primary" />
             <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>

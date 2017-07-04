@@ -1,6 +1,7 @@
 ﻿using Blog.Core.Domain;
 using Blog.Persistence.EntityConfigurations;
 using System.Data.Entity;
+using System.Linq;
 
 namespace Blog.Persistence
 {
@@ -14,6 +15,8 @@ namespace Blog.Persistence
         public BlogContext() : base("name=BlogContext")
         {
             Configuration.LazyLoadingEnabled = false;
+
+            Users.Include(r => Roles).ToList();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
