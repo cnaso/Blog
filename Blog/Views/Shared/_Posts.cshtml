@@ -2,12 +2,6 @@
 @using PagedList.Mvc
 @model PagedList<Blog.Core.Domain.Post>
 
-<div>
-    <p>
-        <a href="@Url.RouteUrl("Login")">Click here</a> to login.
-    </p>
-</div>
-
 @if (Model != null)
 {
     foreach (var post in Model)
@@ -19,12 +13,12 @@
             </div>
             <footer>
                 <ul class="pull-right list-unstyled glyphicon-tags">
-                    @*@foreach (var tag in post.Tags)
+                    @foreach (var tag in post.Tags)
                     {
                         <li>
                             <a class="badge" href="@Url.RouteUrl("Tag", new {tag.Id, tag.Slug})">@tag.Name</a>
                         </li>
-                    }*@
+                    }
                 </ul>
                 Posted: @(post.CreatedAt)
             </footer>

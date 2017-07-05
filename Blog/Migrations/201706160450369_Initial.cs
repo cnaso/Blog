@@ -16,8 +16,8 @@ namespace Blog.Migrations
                         Slug = c.String(nullable: false, maxLength: 128, unicode: false),
                         Content = c.String(nullable: false, unicode: false, storeType: "text"),
                         CreatedAt = c.DateTime(nullable: false, precision: 0),
-                        UpdatedAt = c.DateTime(nullable: false, precision: 0),
-                        DeletedAt = c.DateTime(nullable: false, precision: 0),
+                        UpdatedAt = c.DateTime(precision: 0),
+                        DeletedAt = c.DateTime(precision: 0),
                         User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)

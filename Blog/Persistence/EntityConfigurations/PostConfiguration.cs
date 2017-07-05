@@ -27,12 +27,10 @@ namespace Blog.Persistence.EntityConfigurations
                 .IsRequired();
 
             Property(p => p.UpdatedAt)
-                .HasColumnType("datetime")
-                .IsRequired();
+                .HasColumnType("datetime");
 
             Property(p => p.DeletedAt)
-                .HasColumnType("datetime")
-                .IsRequired();
+                .HasColumnType("datetime");
 
             HasMany(p => p.Tags)
                 .WithMany(t => t.Posts)
