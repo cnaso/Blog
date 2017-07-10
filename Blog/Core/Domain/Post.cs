@@ -24,5 +24,10 @@ namespace Blog.Core.Domain
         public IList<Tag> Tags { get; set; }
 
         public bool IsDeleted { get { return DeletedAt != null; } }
+
+        public Post()
+        {
+            Tags = new List<Tag>();
+        }
     }
 }

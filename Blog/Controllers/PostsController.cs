@@ -16,7 +16,7 @@ namespace Blog.Controllers
             _context = context;
         }
 
-        public ActionResult Index(int page = 1, int pagesize = 4)
+        public ActionResult Index(int page = 1, int pagesize = 5)
         {
             List<Post> posts = _context.Posts.ToList();
             PagedList<Post> pagedList = new PagedList<Post>(posts, page, pagesize);
