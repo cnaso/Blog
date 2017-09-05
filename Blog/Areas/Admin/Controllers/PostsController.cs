@@ -5,6 +5,7 @@ using Blog.Persistence;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -23,7 +24,7 @@ namespace Blog.Areas.Admin.Controllers
 
         public ActionResult Index(int page = 1, int pagesize = 10)
         {
-            List<Post> posts = _context.Posts.ToList();
+            List<Post> posts = _context.Posts.Include(p => p.User).ToList();
             PagedList<Post> pagedList = new PagedList<Post>(posts, page, pagesize);
 
             return View(pagedList);
@@ -34,12 +35,6 @@ namespace Blog.Areas.Admin.Controllers
             return View("Form", new PostsForm
             {
                 IsNew = true,
-                Tags = _context.Tags.Select(tag => new TagCheckbox
-                {
-                    Id = tag.Id,
-                    Name = tag.Name,
-                    IsChecked = false
-                }).ToList()
             });
         }
 
@@ -61,7 +56,7 @@ namespace Blog.Areas.Admin.Controllers
                 post = new Post
                 {
                     CreatedAt = DateTime.UtcNow,
-                    User = _context.Users.FirstOrDefault(u => u.Username == User.Identity.Name)
+                    User = _context.Users.Single(u => u.Username == User.Identity.Name)
                 };
 
                 foreach (var tag in selectedTags)
@@ -71,7 +66,7 @@ namespace Blog.Areas.Admin.Controllers
             }
             else
             {
-                post = _context.Posts.Find(form.PostId);
+                post = _context.Posts.Include(p => p.Tags).Single(p => p.Id == form.PostId);
 
                 if (post == null)
                 {
@@ -102,7 +97,7 @@ namespace Blog.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var post = _context.Posts.Find(id);
+            var post = _context.Posts.Include(p => p.Tags).Single(p => p.Id == id);
 
             if (post == null)
             {
@@ -116,26 +111,18 @@ namespace Blog.Areas.Admin.Controllers
                 Content = post.Content,
                 Slug = post.Slug,
                 Title = post.Title,
-                Tags = _context.Tags.Select(tag => new TagCheckbox
-                {
-                    Id = tag.Id,
-                    Name = tag.Name,
-                    IsChecked = post.Tags.Contains(tag)
-                }).ToList()
+                Tags = String.Join(", ", post.Tags.Select(t => t.Name))
             });
         }
 
-        private IEnumerable<Tag> ReconsileTags(IEnumerable<TagCheckbox> tags)
+        private IEnumerable<Tag> ReconsileTags(string tags)
         {
-            foreach (var tag in tags.Where(t => t.IsChecked))
-            {
-                if (tag.Id != null)
-                {
-                    yield return _context.Tags.Find(tag.Id);
-                    continue;
-                }
+            IList<string> tagList = tags.Split(',').ToList();
 
-                var existingTag = _context.Tags.FirstOrDefault(t => t.Name == tag.Name);
+            foreach (var tag in tagList)
+            {
+                string tagName = tag.Trim();
+                var existingTag = _context.Tags.Single(t => t.Name == tagName);
 
                 if (existingTag != null)
                 {
@@ -145,8 +132,8 @@ namespace Blog.Areas.Admin.Controllers
 
                 var newTag = new Tag
                 {
-                    Name = tag.Name,
-                    Slug = tag.Name.Replace(' ', '-')
+                    Name = tagName,
+                    Slug = tagName.Replace(' ', '-').ToLower()
                 };
 
                 _context.SaveChanges();
