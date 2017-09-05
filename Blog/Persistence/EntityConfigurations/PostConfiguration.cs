@@ -1,7 +1,7 @@
 ﻿using Blog.Core.Domain;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Blog.Persistence.EntityConfigurations
+namespace Blog.Persistence
 {
     public class PostConfiguration : EntityTypeConfiguration<Post>
     {
