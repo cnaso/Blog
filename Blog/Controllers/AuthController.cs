@@ -23,7 +23,7 @@ namespace Blog.Controllers
         [HttpPost]
         public ActionResult Login(AuthLogin form, string returnUrl)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Username == form.Username);
+            var user = _context.Users.Single(u => u.Username == form.Username);
 
             if (user == null || !user.CheckPassword(form.Password))
             {
