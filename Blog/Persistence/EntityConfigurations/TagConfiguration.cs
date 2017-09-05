@@ -22,8 +22,8 @@ namespace Blog.Persistence.EntityConfigurations
                 .Map(m =>
                 {
                     m.ToTable("TagPosts");
-                    m.MapLeftKey("PostId");
-                    m.MapRightKey("TagId");
+                    m.MapLeftKey("TagId");
+                    m.MapRightKey("PostId");
                 });
         }
     }
