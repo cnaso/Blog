@@ -35,7 +35,7 @@
                 <div class="panel-heading">Post Actions</div>
                 <div class="panel-body">
                     <input type="submit" value="@(Model.IsNew ? "Publish Post" : "Update Post")" class="btn btn-success btn-sm" />
-                    <a href="@Url.Action("index")"> or Cancel</a>
+                    <a href="@Url.Action("Index")"> or Cancel</a>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
                             <input type="hidden" class="selected-input" />
                         </li>
 
-                        @for (var i = 0; i < Model.Tags.Count; i++)
+                        @*@for (var i = 0; i < Model.Tags.Count; i++)
                         {
                             var tag = Model.Tags[i];
 
@@ -69,9 +69,13 @@
                                 <input type="hidden" name="Tags[@(i)].Name" value="@tag.Name" />
                                 <input type="hidden" name="Tags[@(i)].IsChecked" value="@tag.IsChecked.ToString()" class="selected-input" />
                             </li>
-                        }
+                        }*@
                     </ul>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="tags" value="@Model.Tags" name="Tags" data-role="tagsinput" />
             </div>
         </div>
     </div>
@@ -79,10 +83,15 @@
 
 @section Scripts
 {
-    @Scripts.Render("~/admin/post/scripts")
     <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
 
     <script>
         CKEDITOR.replace("Content");
+
+        $(document).ready(function () {
+            $('#tags').tagsinput({
+                allowDuplicates: false
+            });
+        });
     </script>
 }
