@@ -2,6 +2,7 @@
 using Blog.Persistence;
 using System;
 using System.Linq;
+using System.Data.Entity;
 using System.Web.Security;
 
 namespace Blog.Infrastructure
@@ -16,7 +17,7 @@ namespace Blog.Infrastructure
 
             using (var context = new BlogContext())
             {
-                user = context.Users.FirstOrDefault(u => u.Username == username);
+                user = context.Users.Include(u => u.Roles).Single(u => u.Username == username);
             }
 
             return user.Roles.Select(role => role.Name).ToArray();
