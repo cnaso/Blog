@@ -9,6 +9,7 @@ namespace Blog.App_Start
             bundles.Add(new StyleBundle("~/Admin/Styles")
                 .Include("~/Content/Styles/bootstrap.css")
                 .Include("~/Content/Styles/bootstrap-theme.css")
+                .Include("~/Content/Styles/bootstrap-tagsinput.css")
                 .Include("~/Content/Styles/Admin.css"));
 
             bundles.Add(new StyleBundle("~/Styles")
@@ -20,6 +21,7 @@ namespace Blog.App_Start
                 .Include("~/Scripts/jquery.validate.js")
                 .Include("~/Scripts/jquery.validate.unobtrusive.js")
                 .Include("~/Scripts/bootstrap.js")
+                .Include("~/Scripts/bootstrap-tagsinput.js")
                 .Include("~/Areas/Admin/Scripts/AdminHandlers.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts")
