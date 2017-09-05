@@ -14,9 +14,9 @@ namespace Blog.Persistence
 
         public BlogContext() : base("name=BlogContext")
         {
-            Configuration.LazyLoadingEnabled = false;
+            Database.SetInitializer(new CreateDatabaseIfNotExists<BlogContext>());
 
-            Users.Include(r => Roles).ToList();
+            Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
