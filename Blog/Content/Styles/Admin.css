@@ -1,9 +1,18 @@
-﻿.field-validation-error {
-    color: red;
+﻿body {
+    /*background-image: linear-gradient(rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.9)), url('../Images/main-bg.jpg');*/
+    /*background-repeat: no-repeat;*/
+    background-color: white;
+    padding-top: 60px;
 }
 
-.field-validation-valid {
-    display: none;
+.centerbody {
+    min-height: 100%;
+    height: 100%;
+}
+
+.navbar {
+    background-color: #212529;
+    border-bottom: 1px solid grey;
 }
 
 .input-validation-error {
@@ -16,34 +25,33 @@
     color: red;
 }
 
-.post-tag-editor .tag-select {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
+.defaultButton {
+    background-color: #212529;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 2px solid #212529;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 10px;
+    padding: 6px 8px;
+    text-decoration: none;
 }
 
-    .post-tag-editor .tag-select li {
-        margin: 0;
-        padding: 0;
-        border-bottom: 1px dashed #eee;
+    .defaultButton:hover {
+        background-color: #ffffff;
+        text-decoration: none;
+        color: #000000;
     }
 
-        .post-tag-editor .tag-select li.template {
-            display: none;
-        }
+    .defaultButton:active {
+        position: relative;
+        top: 2px;
+    }
 
-        .post-tag-editor .tag-select li a {
-            display: block;
-            padding: 2px 5px;
-            border-left: 20px solid #eee;
-        }
-
-            .post-tag-editor .tag-select li a:hover {
-                text-decoration: none;
-                background: #eee;
-            }
-
-        .post-tag-editor .tag-select li.selected a {
-            background: #d9edf7;
-            border-left-color: #3a87ad;
-        }
+.thead-inverse th {
+    color: #ffffff;
+    background-color: #212529;
+}

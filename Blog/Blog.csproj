@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Scripts\AdminHandlers.js" />
+    <Content Include="Content\Images\main-bg.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Shared\DeleteDialog.html" />
     <Content Include="Content\Styles\bootstrap-theme.css" />

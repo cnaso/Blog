@@ -115,6 +115,59 @@ namespace Blog.Areas.Admin.Controllers
             });
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Trash(int id)
+        {
+            var post = _context.Posts.Single(u => u.Id == id);
+
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+
+            post.DeletedAt = DateTime.UtcNow;
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        private void DeletePost(string postId, bool permanent)
+        {
+            
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            var post = _context.Posts.Single(u => u.Id == id);
+
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+
+            _context.Posts.Remove(post);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Restore(int id)
+        {
+            var post = _context.Posts.Single(u => u.Id == id);
+
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+
+            post.DeletedAt = null;
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         private IEnumerable<Tag> ReconsileTags(string tags)
         {
             IList<string> tagList = tags.Split(',').ToList();
