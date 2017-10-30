@@ -3,11 +3,11 @@
 <h1>Users</h1>
 
 <div class="btn-toolbar">
-    <a href="@Url.Action("New")" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> Create User</a>
+    <a href="@Url.Action("New")" class="btn btn-style"><i class="glyphicon glyphicon-plus"></i> Create User</a>
 </div>
-
-<table class="table table-striped">
-    <thead>
+<br />
+<table class="table table-hover">
+    <thead class="thead-inverse">
         <tr>
             <th>Id</th>
             <th>Username</th>
@@ -26,15 +26,15 @@
                 <td>@string.Join(", ", user.Roles.Select(role => role.Name))</td>
                 <td>
                     <div class="btn-toolbar">
-                        <a href="@Url.Action("Edit", new { user.Id })" class="btn btn-xs btn-primary">
+                        <a href="@Url.Action("Edit", new { user.Id })" class="btn btn-xs btn-style">
                             <i class="glyphicon glyphicon-edit"></i>
                             Edit
                         </a>
-                        <a href="@Url.Action("ResetPassword", new { user.Id })" class="btn btn-xs btn-default">
+                        <a href="@Url.Action("ResetPassword", new { user.Id })" class="btn btn-xs btn-style">
                             <i class="glyphicon glyphicon-lock"></i>
                             Reset Password
                         </a>
-                        <a href="@Url.Action("Delete", new { user.Id })" class="btn btn-xs btn-danger delete" data-id="@user.Id" data-title="@string.Format("{0} {1}", "Delete User:", @user.Username)">
+                        <a href="@Url.Action("Delete", new { user.Id })" class="btn btn-xs btn-style" data-id="@user.Id" data-title="@string.Format("{0} {1}", "Delete User:", @user.Username)">
                             <i class="glyphicon glyphicon-remove"></i>
                             Delete
                         </a>

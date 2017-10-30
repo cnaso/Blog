@@ -4,38 +4,51 @@
     Layout = null;
 }
 
+@helper SelectedClass(string name)
+{
+if (name == ViewBag.Selected)
+{
+        <text>underline-text</text>
+}
+}
+
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" charset="utf-8" />
-    <title>_Layout</title>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>Blog - Admin</title>
 
     @Styles.Render("~/Styles")
 </head>
 <body>
-    <div class="site-header">
-        <header class="container">
-            <h1 class="page-header">
-                <a href="@Url.RouteUrl("Home")">Index Layout</a>
-                <small>Secondary Title</small>
-            </h1>
-        </header>
-    </div>
-
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                @RenderBody()
+        <nav id="header" class="navbar navbar-fixed-top">
+            <div id="header-container" class="container navbar-container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a id="brand" class="navbar-brand" href="#">BLOG</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="divider-vertical"></li>
+                        <li>@Html.RouteLink("HOME", "Home", new { }, new { @class = SelectedClass("home") })</li>
+                        <li><a href="#about">ABOUT</a></li>
+                        <li><a href="#contact">CONTACT</a></li>
+                    </ul>
+                    <span class="navbar-text pull-right">
+                        <i class="glyphicon glyphicon-user"></i>@User.Identity.Name | <a href="@Url.Action("logout")">Logout</a>
+                    </span>
+                </div>
             </div>
-            <div class="col-lg-4 sidebar">
-                @*@Html.Action("Sidebar", "Layout")*@
-            </div>
-        </div>
-
-        <footer>
-            &copy; @DateTime.UtcNow.Year
-        </footer>
+        </nav>
+        @RenderBody()
     </div>
 
     @Scripts.Render("~/Scripts")

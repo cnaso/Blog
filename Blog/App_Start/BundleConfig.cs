@@ -8,12 +8,11 @@ namespace Blog.App_Start
         {
             bundles.Add(new StyleBundle("~/Admin/Styles")
                 .Include("~/Content/Styles/bootstrap.css")
-                .Include("~/Content/Styles/bootstrap-tagsinput.css")
-                .Include("~/Content/Styles/Admin.css"));
+                .Include("~/Content/Styles/admin.css"));
 
             bundles.Add(new StyleBundle("~/Styles")
                 .Include("~/Content/Styles/bootstrap.css")
-                .Include("~/Content/Styles/Site.css"));
+                .Include("~/Content/Styles/site.css"));
 
             bundles.Add(new ScriptBundle("~/Admin/Scripts")
                 .Include("~/Scripts/jquery-3.1.1.js")

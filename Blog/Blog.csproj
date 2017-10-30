@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -143,8 +144,8 @@
     <Content Include="Content\Shared\DeleteDialog.html" />
     <Content Include="Content\Styles\bootstrap-theme.css" />
     <Content Include="Content\Styles\bootstrap.css" />
-    <Content Include="Content\Styles\Admin.css" />
-    <Content Include="Content\Styles\Site.css" />
+    <Content Include="Content\Styles\admin.css" />
+    <Content Include="Content\Styles\site.css" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff2" />

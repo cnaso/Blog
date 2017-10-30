@@ -6,9 +6,9 @@
 
 @helper SelectedClass(string name)
 {
-if (name == ViewBag.Selected)
-{
-        @: active
+    if (name == ViewBag.Selected)
+    {
+        <text>underline-text</text>
     }
 }
 
@@ -17,12 +17,13 @@ if (name == ViewBag.Selected)
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>Blog - Admin</title>
 
     @Styles.Render("~/Admin/Styles")
 </head>
 <body>
-    <div class="container centerbody">
+    <div class="container">
         <nav id="header" class="navbar navbar-fixed-top">
             <div id="header-container" class="container navbar-container">
                 <div class="navbar-header">
@@ -32,27 +33,24 @@ if (name == ViewBag.Selected)
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a id="brand" class="navbar-brand" href="#">Blog</a>
+                    <a id="brand" class="navbar-brand" href="#">BLOG</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="divider-vertical"></li>
+                        <li>@Html.RouteLink("HOME", "Home", new { }, new { @class = SelectedClass("home") })</li>
+                        <li><a href="#about">ABOUT</a></li>
+                        <li><a href="#contact">CONTACT</a></li>
+                        <li class="divider-vertical"></li>
+                        <li>@Html.ActionLink("POSTS", "Index", "Posts", new { area = "admin" }, new { @class = SelectedClass("posts") })</li>
+                        <li>@Html.ActionLink("USERS", "Index", "Users", new { area = "admin" }, new { @class = SelectedClass("users") })</li>
                     </ul>
+                    <span class="navbar-text pull-right">
+                        <i class="glyphicon glyphicon-user"></i>@User.Identity.Name | <a href="@Url.Action("logout")">Logout</a>
+                    </span>
                 </div>
             </div>
         </nav>
-
-        <ul class="nav nav-pills">
-            <li class="@SelectedClass("posts")">
-                @Html.ActionLink("Posts", "Index", "Posts", new { area = "admin" }, null)
-            </li>
-            <li class="@SelectedClass("users")">
-                @Html.ActionLink("Users", "Index", "Users", new { area = "admin" }, null)
-            </li>
-        </ul>
-
         @RenderBody()
     </div>
 

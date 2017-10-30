@@ -2,38 +2,74 @@
 @using PagedList.Mvc
 @model PagedList<Blog.Core.Domain.Post>
 
-<div>
-    <p>
-        <a href="@Url.RouteUrl("Login")">Click here</a> to login.
-    </p>
+<div class="page-header">
+    <h1>Blog <small>a blog about stuff</small></h1>
 </div>
 
-@if (Model != null)
-{
-    foreach (var post in Model)
-    {
-        <article>
-            <h1><a href="@Url.RouteUrl("Post", new { post.Id, post.Slug })">@post.Title</a></h1>
-            <div>
-                @Html.Raw(post.Content)
-            </div>
-            <footer>
-                <ul class="pull-right list-unstyled glyphicon-tags">
-                    @foreach (var tag in post.Tags)
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            @if (Model != null)
+            {
+                foreach (var post in Model)
+                {
+                    <article>
+                        <h1><a href="@Url.RouteUrl("Post", new { post.Id, post.Slug })">@post.Title</a></h1>
+                        <div>
+                            @Html.Raw(post.Content)
+                        </div>
+                        <footer>
+                            <ul class="pull-right list-unstyled glyphicon-tags">
+                                @foreach (var tag in post.Tags)
                     {
-                        <li>
-                            <a class="badge" href="@Url.RouteUrl("Tag", new {tag.Id, tag.Slug})">@tag.Name</a>
-                        </li>
-                    }
-                </ul>
-                Posted: @(post.CreatedAt)
-            </footer>
-        </article>
-    }
-}
+                                    <li>
+                                        <a class="badge" href="@Url.RouteUrl("Tag", new {tag.Id, tag.Slug})">@tag.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                            Posted: @(post.CreatedAt)
+                        </footer>
+                    </article>
+                }
+            }
 
-<div class="col-md-12">
-    <div class="pagination">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+            <div class="col-md-12">
+                <div class="pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+                </div>
+            </div>
+
+
+            <section>
+                <article>
+                    <div>
+                        <div>
+                            <a href="#postlink" class="test">test</a>
+                            @*<img width="700" height="500" src="../../Content/Images/main-bg.jpg" />*@
+                        </div>
+                        <div class="opacity-full bg-dark-gray"></div>
+                    </div>
+                    <div class="container post-details">
+                        <div class="row margin-seven-tb xs-margin-ten-tb">
+                            <div class="col-md-1 col-sm-2 col-xs-3">
+                                <span class="alt-font title-large blog-post-number bg-fast-yellow">01</span>
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-12 md-margin-one-left sm-no-margin">
+                                <span class="text-small text-uppercase alt-font">
+                                    Posted by <span class="author vcard">
+                                        <a href="http://wpdemos.themezaa.com/brando/agency/author/agency/" class="url fn n">admin</a>
+                                    </span> | <span class="published">17 02 2016</span><time class="updated display-none" datetime="2016-07-27T08:25:29+00:00">27 07 2016</time>
+                                </span><h5 class="alt-font margin-tb-15px entry-title"><a href="http://wpdemos.themezaa.com/brando/agency/design-is-not-just-what-it-looks-like-and-feels-like/">Design is not just what it looks like and feels like.</a></h5><div><a href="http://wpdemos.themezaa.com/brando/agency/wp-admin/admin-ajax.php?action=process_simple_like&nonce=9bc79570c7&post_id=378&disabled=true&is_comment=0" class="sl-button blog-like sl-button-378" data-nonce="9bc79570c7" data-post-id="378" data-iscomment="0" title="Like"><i class="fa fa-heart-o"></i>89 Likes</a><a href="http://wpdemos.themezaa.com/brando/agency/design-is-not-just-what-it-looks-like-and-feels-like/#respond" class="comment"><i class="fa fa-comment-o"></i>Leave a comment</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            
+        </div>
+        <div class="col-lg-4 sidebar">
+            @*@Html.Action("Sidebar", "Layout")*@
+            sidebar maaaaann
+        </div>
     </div>
 </div>
