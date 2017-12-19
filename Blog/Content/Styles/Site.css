@@ -110,27 +110,3 @@
     background-color: #212529;
     border-color: #212529;
 }
-
-.home-block {
-    display: block;
-    height: 180px;
-    line-height: 180px;
-    margin-bottom: 20px;
-    background-size: cover;
-    /*background-position: 1000px 1000px;*/
-    box-shadow: 1px 1px 4px #111;
-    background-image: inherit;
-    background-repeat: no-repeat;
-}
-
-    .home-block:hover {
-        background-position: center center !important;
-    }
-
-.test {
-    background-position: 1000px 1000px;
-}
-
-    .test:hover {
-        background-position: center center !important;
-    }

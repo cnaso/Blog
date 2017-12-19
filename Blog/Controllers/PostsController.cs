@@ -2,8 +2,9 @@
 using Blog.Persistence;
 using PagedList;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
+using System.Data.Entity;
+using System.Linq;
 
 namespace Blog.Controllers
 {
@@ -18,7 +19,7 @@ namespace Blog.Controllers
 
         public ActionResult Index(int page = 1, int pagesize = 5)
         {
-            List<Post> posts = _context.Posts.ToList();
+            List<Post> posts = _context.Posts.Include(u => u.User).Include(t => t.Tags).ToList();
             PagedList<Post> pagedList = new PagedList<Post>(posts, page, pagesize);
 
             return View(pagedList);

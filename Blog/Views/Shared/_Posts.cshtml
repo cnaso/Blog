@@ -7,22 +7,38 @@
     foreach (var post in Model)
     {
         <article>
-            <h1><a href="@Url.RouteUrl("Post", new { post.Id, post.Slug })">@post.Title</a></h1>
+            <h2><a href="@Url.RouteUrl("Post", new { post.Id, post.Slug })">@post.Title</a></h2>
+            <ul class="list-inline">
+                <li>
+                    <i class="glyphicon glyphicon-time"></i>
+                    @(post.CreatedAt)
+                </li>
+                <li>
+                    <i class="glyphicon glyphicon-user"></i>
+                    @(post.User.Username)
+                </li>
+                <li>
+                    <i class="glyphicon glyphicon-comment"></i>
+                    No Comments
+                </li>
+            </ul>
             <div>
                 @Html.Raw(post.Content)
             </div>
             <footer>
-                <ul class="pull-right list-unstyled glyphicon-tags">
+                <ul class="pull-right list-unstyled glyphicon glyphicon-tags">
                     @foreach (var tag in post.Tags)
                     {
                         <li>
-                            <a class="badge" href="@Url.RouteUrl("Tag", new {tag.Id, tag.Slug})">@tag.Name</a>
+                            @*<a class="badge" href="@Url.RouteUrl("Tag", new {tag.Id, tag.Slug})">@tag.Name</a> //TODO: implement tag routing*@
+                            <a class="badge" href="#">@tag.Name</a>
                         </li>
                     }
                 </ul>
-                Posted: @(post.CreatedAt)
+                <a href="@Url.Action("#")" class="btn btn-style">Read More</a>
             </footer>
         </article>
+        <hr />
     }
 }
 
