@@ -6,10 +6,10 @@
 
 @helper SelectedClass(string name)
 {
-if (name == ViewBag.Selected)
-{
+    if (name == ViewBag.Selected)
+    {
         <text>underline-text</text>
-}
+    }
 }
 
 <!DOCTYPE html>
@@ -18,7 +18,8 @@ if (name == ViewBag.Selected)
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <title>Blog - Admin</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <title>Blog</title>
 
     @Styles.Render("~/Styles")
 </head>

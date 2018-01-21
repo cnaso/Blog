@@ -1,5 +1,4 @@
 ﻿@using PagedList
-@using PagedList.Mvc
 @model PagedList<Blog.Core.Domain.Post>
 
 <div class="page-header">
@@ -12,8 +11,7 @@
             @Html.Partial("_Posts", Model)
         </div>
         <div class="col-lg-4 sidebar">
-            @*@Html.Action("Sidebar", "Layout")*@
-            sidebar
+            @Html.Action("Sidebar", "Layout")
         </div>
     </div>
 </div>
