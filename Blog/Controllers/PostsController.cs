@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Linq;
+using Blog.Infrastructure;
 
 namespace Blog.Controllers
 {
@@ -17,6 +18,7 @@ namespace Blog.Controllers
             _context = context;
         }
 
+        [Selected("home")]
         public ActionResult Index(int page = 1, int pagesize = 5)
         {
             List<Post> posts = _context.Posts.Include(u => u.User).Include(t => t.Tags).ToList();
