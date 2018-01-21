@@ -22,7 +22,11 @@ namespace Blog
 
             routes.MapRoute("Post", "post/{id}-{slug}", new { controller = "Posts", action = "Show" }, namespaces);
 
-            routes.MapRoute("_Sidebar", "", new { controller = "Layout", action = "Sidebar" }, namespaces);
+            routes.MapRoute("Sidebar", "", new { controller = "Sidebar", action = "Sidebar" }, namespaces);
+
+            routes.MapRoute("TagRoute", "tag/{idAndSlug}", new { controller = "Posts", action = "Tag" }, namespaces);
+
+            routes.MapRoute("Tag", "tag/{id}-{slug}", new { controller = "Posts", action = "Tag" }, namespaces);
         }
     }
 }
