@@ -1,4 +1,6 @@
-﻿<div class="container-fluid sidebar-margin">
+﻿@model Blog.ViewModels.Sidebar
+
+<div class="container-fluid sidebar-margin">
     <div class="row sidebar-padding">
         <div class="input-group col-md-8">
             <form class="form" role="form">
@@ -40,30 +42,13 @@
     <div class="row">
         <div class="col-md-10 sidebar-tags">
             <ul class="list-inline">
-                <li class="tag-link">
-                    <a href="#">mod</a>
-                    <span class="post-tag-count">#</span>
-                </li>
-                <li class="tag-link">
-                    <a href="#">c#</a>
-                    <span class="post-tag-count">#</span>
-                </li>
-                <li class="tag-link">
-                    <a href="#">css</a>
-                    <span class="post-tag-count">#</span>
-                </li>
-                <li class="tag-link">
-                    <a href="#">async</a>
-                    <span class="post-tag-count">#</span>
-                </li>
-                <li class="tag-link">
-                    <a href="#">parallel</a>
-                    <span class="post-tag-count">#</span>
-                </li>
-                <li class="tag-link">
-                    <a href="#">javascript</a>
-                    <span class="post-tag-count">#</span>
-                </li>
+                @foreach (var tag in Model.Tags)
+                {
+                    <li class="tag-link">
+                        <a href="@Url.RouteUrl("Tag", new {tag.Id, tag.Slug})">@tag.Name</a>
+                        <span class="post-tag-count">@tag.PostCount</span>
+                    </li>
+                }
             </ul>
         </div>
     </div>

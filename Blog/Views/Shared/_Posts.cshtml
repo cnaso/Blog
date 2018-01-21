@@ -26,16 +26,14 @@
                 @Html.Raw(post.Content)
             </div>
             <footer>
-                @*<a href="@Url.RouteUrl("Post", new { post.Id, post.Slug })" class="btn btn-style">Read More</a>*@
                 <a href="@Url.RouteUrl("Post", new { post.Id, post.Slug })" class="post-read-more">Read More...</a>
                 <div class="post-tag">
                     <ul class="pull-right list-inline post-tag-list">
                         @foreach (var tag in post.Tags)
                         {
                             <li class="tag-link">
-                                @*<a class="badge" href="@Url.RouteUrl("Tag", new {tag.Id, tag.Slug})">@tag.Name</a> //TODO: implement tag routing*@
-                                <a href="#">@tag.Name</a>
-                                <span class="post-tag-count">#</span>
+                                <a href="@Url.RouteUrl("Tag", new {tag.Id, tag.Slug})">@tag.Name</a>
+                                <span class="post-tag-count">@tag.Posts.Count</span>
                             </li>
                         }
                     </ul>
