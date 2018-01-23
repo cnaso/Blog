@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using System.Linq;
 using Blog.Infrastructure;
+using System.Text.RegularExpressions;
 
 namespace Blog.Controllers
 {
@@ -21,8 +22,34 @@ namespace Blog.Controllers
         [Selected("home")]
         public ActionResult Index(int page = 1, int pagesize = 5)
         {
-            List<Post> posts = _context.Posts.Include(u => u.User).Include(t => t.Tags).ToList();
+            IList<Post> posts = _context.Posts.Include(u => u.User).Include(t => t.Tags).ToList();
             PagedList<Post> pagedList = new PagedList<Post>(posts, page, pagesize);
+
+            return View(pagedList);
+        }
+
+        public ActionResult Tag(string idAndSlug, int page = 1)
+        {
+            var tagIdAndSlugFormat = new Regex(@"^(\d+)\-(.*)?$");
+
+            if (!tagIdAndSlugFormat.IsMatch(idAndSlug))
+            {
+                return HttpNotFound();
+            }
+
+            var tagParts = idAndSlug.Split('-');
+            int tagId = int.Parse(tagParts[0]);
+
+            Tag tag = _context.Tags.Include(t => t.Posts.Select(p => p.User)).FirstOrDefault(t => t.Id == tagId);
+
+            if (tag == null)
+            {
+                return HttpNotFound();
+            }
+
+            IList<Post> posts = tag.Posts;
+
+            PagedList<Post> pagedList = new PagedList<Post>(posts, page, 5);
 
             return View(pagedList);
         }

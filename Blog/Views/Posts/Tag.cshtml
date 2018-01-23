@@ -1,0 +1,12 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model PagedList<Blog.Core.Domain.Post>
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        Showing posts tagged with <string>*Tag name*</string>.
+        <a href="@Url.RouteUrl("Home")" class="pull-right">Show all</a>
+    </div>
+</div>
+
+@Html.Partial("_Posts", Model)
