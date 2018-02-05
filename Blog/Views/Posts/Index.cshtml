@@ -1,5 +1,4 @@
-﻿@using PagedList
-@model PagedList<Blog.Core.Domain.Post>
+﻿@model Blog.ViewModels.BlogPostViewModel.PostsViewModel
 
 <div class="page-header">
     <h1>Blog <small>a blog about stuff</small></h1>
@@ -8,7 +7,16 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8">
-            @Html.Partial("_Posts", Model)
+            @if (Model.Tag != null)
+            {
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        Showing posts tagged with <b>@Model.Tag.Name</b>.
+                        <a href="@Url.RouteUrl("Home")" class="pull-right">Show all</a>
+                    </div>
+                </div>
+            }
+            @Html.Partial("_Posts", Model.Posts)
         </div>
         <div class="col-lg-4 sidebar">
             @Html.Action("Sidebar", "Sidebar")

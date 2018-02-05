@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using Blog.Infrastructure;
 using System.Text.RegularExpressions;
+using static Blog.ViewModels.BlogPostViewModel;
 
 namespace Blog.Controllers
 {
@@ -25,7 +26,9 @@ namespace Blog.Controllers
             IList<Post> posts = _context.Posts.Include(u => u.User).Include(t => t.Tags).ToList();
             PagedList<Post> pagedList = new PagedList<Post>(posts, page, pagesize);
 
-            return View(pagedList);
+            PostsViewModel postModel = new PostsViewModel(posts, page, pagesize);
+
+            return View(postModel);
         }
 
         public ActionResult Tag(string idAndSlug, int page = 1)
@@ -51,7 +54,10 @@ namespace Blog.Controllers
 
             PagedList<Post> pagedList = new PagedList<Post>(posts, page, 5);
 
-            return View(pagedList);
+            PostsViewModel postModel = new PostsViewModel(posts, page, 5);
+            postModel.Tag = tag;
+
+            return View("Index", postModel);
         }
     }
 }

@@ -8,6 +8,7 @@ body {
     background-color: white;
     font-family: 'Roboto', sans-serif !important;
     padding-top: 60px;
+    overflow-y: scroll;
 }
 
 .navbar {
@@ -170,7 +171,7 @@ body {
 }
 
 .sidebar-header {
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif !important;
     margin-top: 10px;
     font-weight: bold;
     letter-spacing: 1px;
