@@ -31,13 +31,13 @@ namespace Blog.Controllers
             return View(postModel);
         }
 
-        public ActionResult Tag(string idAndSlug, int page = 1)
+        public PartialViewResult Tag(string idAndSlug, int page = 1)
         {
             var tagIdAndSlugFormat = new Regex(@"^(\d+)\-(.*)?$");
 
             if (!tagIdAndSlugFormat.IsMatch(idAndSlug))
             {
-                return HttpNotFound();
+                //return HttpNotFound(); return all posts?
             }
 
             var tagParts = idAndSlug.Split('-');
@@ -45,19 +45,18 @@ namespace Blog.Controllers
 
             Tag tag = _context.Tags.Include(t => t.Posts.Select(p => p.User)).FirstOrDefault(t => t.Id == tagId);
 
-            if (tag == null)
-            {
-                return HttpNotFound();
-            }
+            //if (tag == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //TODO return all posts?
 
             IList<Post> posts = tag.Posts;
-
-            PagedList<Post> pagedList = new PagedList<Post>(posts, page, 5);
 
             PostsViewModel postModel = new PostsViewModel(posts, page, 5);
             postModel.Tag = tag;
 
-            return View("Index", postModel);
+            return PartialView("_Posts", postModel);
         }
     }
 }

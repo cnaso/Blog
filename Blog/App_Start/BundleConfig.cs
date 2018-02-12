@@ -16,6 +16,7 @@ namespace Blog.App_Start
 
             bundles.Add(new ScriptBundle("~/Admin/Scripts")
                 .Include("~/Scripts/jquery-3.1.1.js")
+                .Include("~/Scripts/jquery.unobtrusive-ajax.js")
                 .Include("~/Scripts/jquery.validate.js")
                 .Include("~/Scripts/jquery.validate.unobtrusive.js")
                 .Include("~/Scripts/bootstrap.js")
@@ -24,6 +25,7 @@ namespace Blog.App_Start
 
             bundles.Add(new ScriptBundle("~/Scripts")
                 .Include("~/Scripts/jquery-3.1.1.js")
+                .Include("~/Scripts/jquery.unobtrusive-ajax.js")
                 .Include("~/Scripts/jquery.validate.js")
                 .Include("~/Scripts/jquery.validate.unobtrusive.js")
                 .Include("~/Scripts/bootstrap.js"));

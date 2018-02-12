@@ -45,7 +45,12 @@
                 @foreach (var tag in Model.Tags)
                 {
                     <li class="tag-link">
-                        <a href="@Url.RouteUrl("Tag", new {tag.Id, tag.Slug})">@tag.Name</a>
+                        @Ajax.ActionLink(tag.Name, "Tag", "Posts", new { tag.Id, tag.Slug }, new AjaxOptions()
+                           {
+                               HttpMethod = "GET",
+                               UpdateTargetId = "post-content",
+                               InsertionMode = InsertionMode.Replace
+                           })
                         <span class="post-tag-count">@tag.PostCount</span>
                     </li>
                 }
