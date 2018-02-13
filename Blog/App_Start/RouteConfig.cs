@@ -24,9 +24,9 @@ namespace Blog
 
             routes.MapRoute("Sidebar", "", new { controller = "Sidebar", action = "Sidebar" }, namespaces);
 
-            routes.MapRoute("TagRoute", "tag/{idAndSlug}", new { controller = "Posts", action = "Tag" }, namespaces);
+            routes.MapRoute("TagRoute", "tag/{idAndSlug}", new { controller = "Posts", action = "TagPosts" }, namespaces);
 
-            routes.MapRoute("Tag", "tag/{id}-{slug}", new { controller = "Posts", action = "Tag" }, namespaces);
+            routes.MapRoute("TagPosts", "tag/{id}-{slug}", new { controller = "Posts", action = "TagPosts" }, namespaces);
         }
     }
 }

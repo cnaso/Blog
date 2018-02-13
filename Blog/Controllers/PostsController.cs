@@ -31,7 +31,8 @@ namespace Blog.Controllers
             return View(postModel);
         }
 
-        public PartialViewResult Tag(string idAndSlug, int page = 1)
+        [AjaxActionOnly]
+        public PartialViewResult TagPosts(string idAndSlug, int page = 1)
         {
             var tagIdAndSlugFormat = new Regex(@"^(\d+)\-(.*)?$");
 

@@ -195,6 +195,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AjaxActionOnlyAttribute.cs" />
     <Compile Include="Infrastructure\SelectedAttribute.cs" />
     <Compile Include="Infrastructure\UserRoleProvider.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -220,7 +221,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Posts.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
-    <Content Include="Views\Posts\Tag.cshtml" />
     <Content Include="Views\Shared\_Post.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
