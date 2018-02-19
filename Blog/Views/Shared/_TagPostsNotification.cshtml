@@ -1,0 +1,8 @@
+﻿@model Blog.ViewModels.SidebarTagViewModel
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        Showing posts tagged with <b>@Model.Name</b>.
+        <a href="@Url.RouteUrl("Home")" class="pull-right">Show all</a>
+    </div>
+</div>

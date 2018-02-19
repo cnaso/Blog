@@ -1,1 +1,20 @@
-﻿@model Blog.ViewModels.BlogPostViewModel.PostViewModel
+﻿@model Blog.ViewModels.PostsPostViewModel
+
+<h3>@Model.Title</h3>
+<ul class="list-inline">
+    <li>
+        <i class="glyphicon glyphicon-time"></i>
+        @(Model.CreatedAt)
+    </li>
+    <li>
+        <i class="glyphicon glyphicon-user"></i>
+        @(Model.User)
+    </li>
+    <li>
+        <i class="glyphicon glyphicon-comment"></i>
+        No Comments
+    </li>
+</ul>
+<div>
+    @Html.Raw(Model.Content)
+</div>

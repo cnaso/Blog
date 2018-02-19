@@ -7,7 +7,8 @@ using System.Data.Entity;
 using System.Linq;
 using Blog.Infrastructure;
 using System.Text.RegularExpressions;
-using static Blog.ViewModels.BlogPostViewModel;
+using System;
+using Blog.ViewModels;
 
 namespace Blog.Controllers
 {
@@ -26,7 +27,7 @@ namespace Blog.Controllers
             IList<Post> posts = _context.Posts.Include(u => u.User).Include(t => t.Tags).ToList();
             PagedList<Post> pagedList = new PagedList<Post>(posts, page, pagesize);
 
-            PostsViewModel postModel = new PostsViewModel(posts, page, pagesize);
+            PostsIndexViewModel postModel = new PostsIndexViewModel(posts, page, pagesize);
 
             return View(postModel);
         }
@@ -34,17 +35,14 @@ namespace Blog.Controllers
         [AjaxActionOnly]
         public PartialViewResult TagPosts(string idAndSlug, int page = 1)
         {
-            var tagIdAndSlugFormat = new Regex(@"^(\d+)\-(.*)?$");
+            var tagSlugParts = SeparateIdAndSlug(idAndSlug);
 
-            if (!tagIdAndSlugFormat.IsMatch(idAndSlug))
+            if (tagSlugParts == null)
             {
-                //return HttpNotFound(); return all posts?
+                //return HttpNotFound(); show error
             }
 
-            var tagParts = idAndSlug.Split('-');
-            int tagId = int.Parse(tagParts[0]);
-
-            Tag tag = _context.Tags.Include(t => t.Posts.Select(p => p.User)).FirstOrDefault(t => t.Id == tagId);
+            Tag tag = _context.Tags.Where(t => t.Id == tagSlugParts.Item1).Include("Posts.User").Include("Posts.Tags").FirstOrDefault();
 
             //if (tag == null)
             //{
@@ -54,10 +52,81 @@ namespace Blog.Controllers
 
             IList<Post> posts = tag.Posts;
 
-            PostsViewModel postModel = new PostsViewModel(posts, page, 5);
-            postModel.Tag = tag;
+            PostsIndexViewModel postModel = new PostsIndexViewModel(posts, page, 5);
+            postModel.Tag = new SidebarTagViewModel
+            {
+                Id = tag.Id,
+                Name = tag.Name,
+                Slug = tag.Slug,
+                PostCount = tag.Posts.Count
+            };
 
             return PartialView("_Posts", postModel);
+        }
+
+        [AjaxActionOnly]
+        public PartialViewResult Post(string idAndSlug, int page = 1)
+        {
+            var postSlugParts = SeparateIdAndSlug(idAndSlug);
+
+            if (postSlugParts == null)
+            {
+                //return HttpNotFound(); show error
+            }
+
+            Post post = _context.Posts.Include(p => p.User).FirstOrDefault(p => p.Id == postSlugParts.Item1);
+
+            //if (post == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //TODO return all posts?
+
+            PostsPostViewModel postModel = new PostsPostViewModel()
+            {
+                PostId = post.Id,
+                User = post.User.Username,
+                Title = post.Title,
+                Content = post.Content,
+                Tags = getTagViewModelList(post.Tags),
+                CreatedAt = post.CreatedAt,
+                UpdatedAt = post.UpdatedAt
+            };
+
+            return PartialView("_Post", postModel);
+        }
+
+        private Tuple<int, string> SeparateIdAndSlug(string idAndSlug)
+        {
+            var matches = Regex.Match(idAndSlug, @"^(\d+)\-(.*)?$");
+
+            if (!matches.Success)
+            {
+                return null;
+            }
+
+            var id = int.Parse(matches.Result("$1"));
+            var slug = matches.Result("$2");
+
+            return Tuple.Create(id, slug);
+        }
+
+        private IList<SidebarTagViewModel> getTagViewModelList(IList<Tag> tags)
+        {
+            IList<SidebarTagViewModel> tagViewModels = new List<SidebarTagViewModel>();
+
+            foreach (var tag in tags)
+            {
+                tagViewModels.Add(new SidebarTagViewModel
+                {
+                    Id = tag.Id,
+                    Name = tag.Name,
+                    Slug = tag.Slug,
+                    PostCount = tag.Posts.Count
+                });
+            }
+
+            return tagViewModels;
         }
     }
 }

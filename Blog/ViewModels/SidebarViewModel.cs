@@ -2,25 +2,25 @@
 
 namespace Blog.ViewModels
 {
-    public class Sidebar
+    public class SidebarViewModel
     {
-        public IList<CategoryViewModel> Categories { get; set; }
-        public IList<TagViewModel> Tags { get; set; }
+        public IList<SidebarCategoryViewModel> Categories { get; set; }
+        public IList<SidebarTagViewModel> Tags { get; set; }
 
-        public Sidebar()
+        public SidebarViewModel()
         {
-            Categories = new List<CategoryViewModel>();
-            Tags = new List<TagViewModel>();
+            Categories = new List<SidebarCategoryViewModel>();
+            Tags = new List<SidebarTagViewModel>();
         }
     }
 
-    public class CategoryViewModel
+    public class SidebarCategoryViewModel
     {
         public string Name { get; set; }
         public int PostCount { get; set; }
     }
 
-    public class TagViewModel
+    public class SidebarTagViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

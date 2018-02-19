@@ -1,16 +1,8 @@
-﻿@using PagedList
-@using PagedList.Mvc
-@model Blog.ViewModels.BlogPostViewModel.PostsViewModel
+﻿@using PagedList.Mvc
+@using Blog.Infrastructure
+@model Blog.ViewModels.PostsIndexViewModel
 
-@if (Model.Tag != null)
-            {
-    <div class="panel panel-warning">
-        <div class="panel-heading">
-            Showing posts tagged with <b>@Model.Tag.Name</b>.
-            <a href="@Url.RouteUrl("Home")" class="pull-right">Show all</a>
-        </div>
-    </div>
-}
+@Html.TagPosts(Model.Tag)
 @if (Model != null)
 {
     foreach (var post in Model.Posts)
@@ -35,7 +27,13 @@
                 @Html.Raw(post.Content)
             </div>
             <footer>
-                <a href="@Url.RouteUrl("Post", new { post.Id, post.Slug })" class="post-read-more">Read More...</a>
+                @*<a href="@Url.RouteUrl("Post", new { post.Id, post.Slug })" class="post-read-more">Read More...</a>*@
+                @Ajax.ActionLink("Read More...", "Post", "Posts", new { post.Id, post.Slug }, new AjaxOptions()
+                {
+                    HttpMethod = "GET",
+                    UpdateTargetId = "post-content",
+                    InsertionMode = InsertionMode.Replace
+                }, new { @class = "post-read-more" })
                 <div class="post-tag">
                     <ul class="pull-right list-inline post-tag-list">
                         @foreach (var tag in post.Tags)

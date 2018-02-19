@@ -197,6 +197,7 @@
     </Compile>
     <Compile Include="Infrastructure\AjaxActionOnlyAttribute.cs" />
     <Compile Include="Infrastructure\SelectedAttribute.cs" />
+    <Compile Include="Infrastructure\TagPostsHtmlHelper.cs" />
     <Compile Include="Infrastructure\UserRoleProvider.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\BlogContext.cs" />
@@ -222,6 +223,7 @@
     <Content Include="Views\Shared\_Posts.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_Post.cshtml" />
+    <Content Include="Views\Shared\_TagPostsNotification.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

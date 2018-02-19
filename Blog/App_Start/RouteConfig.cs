@@ -18,9 +18,9 @@ namespace Blog
 
             routes.MapRoute("Home", "", new { controller = "Posts", action = "Index" }, namespaces);
 
-            routes.MapRoute("PostRoute", "post/{idAndSlug}", new { controller = "Posts", action = "Show" }, namespaces);
+            routes.MapRoute("PostRoute", "post/{idAndSlug}", new { controller = "Posts", action = "Post" }, namespaces);
 
-            routes.MapRoute("Post", "post/{id}-{slug}", new { controller = "Posts", action = "Show" }, namespaces);
+            routes.MapRoute("Post", "post/{id}-{slug}", new { controller = "Posts", action = "Post" }, namespaces);
 
             routes.MapRoute("Sidebar", "", new { controller = "Sidebar", action = "Sidebar" }, namespaces);
 
